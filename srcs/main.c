@@ -12,8 +12,21 @@
 
 #include "checker.h"
 
-int main(void)
+static t_list   *get_a_stack
+
+static void     checker_pars(char **av, int *a_stack, t_list *inst)
 {
-    ft_printf("YES\n");
+    (void)a_stack;
+    (void)inst;
+}
+
+int             main(int ac, char **av)
+{
+    int *a_stack;
+
+    if (ac != 2)
+        return_error(-1);
+    if (!(a_stack = checker_pars(fd)))
+        exit(-1);
     return (0);
 }
