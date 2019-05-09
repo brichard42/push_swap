@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/05/06 21:28:29 by brichard         ###   ########.fr        #
+#    Updated: 2019/05/09 18:21:35 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,11 @@ INC_FILES =		checker.h
 #                                   SRCS_FILES                                 #
 ################################################################################
 
-SRCS_FILES =	main.c
+SRCS_FILES =	main.c \
+				operators.c \
+				operators2.c \
+				operators3.c \
+				slide.c \
 
 ################################################################################
 #                                    COlORS                                    #
@@ -87,7 +91,7 @@ printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@F)$(NO_COLOR)\r"; \
 		printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
 	fi; \
 	cat $@.log; \
-	rm -f $@.log; \
+	rm -f $@.log 2> /dev/null; \
 	exit $$RESULT
 endef
 
@@ -118,7 +122,7 @@ $(LIBS):
 	@make -C $(LIB_PATH)
 
 norme:
-	@$(call run_and_test, norminette | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning')
+	@$(call run_and_test, norminette $(SRCS_PATH) $(INC_PATH) | grep -v 'Warning: Not a valid file' | grep -B 1 -e 'Error' -e 'Warning' 2> /dev/null)
 
 lc:
 	@$(call run_and_test, $(RM) $(D_OBJS) && rm -rf $(OBJS_PATH) $(CLEAN_LIB))

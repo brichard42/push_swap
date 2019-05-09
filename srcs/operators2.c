@@ -1,17 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   operators2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:10:08 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/09 18:21:50 by brichard         ###   ########.fr       */
+/*   Created: 2019/05/09 15:57:45 by brichard          #+#    #+#             */
+/*   Updated: 2019/05/09 17:06:26 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "checker.h"
 
-int	main(int ac, char **av)
+void		pa(t_env *env)
 {
-	return (0);
+	if (env->b.size == 0)
+		return ;
+	down_slide(env->a.stack, env->a.size);
+	env->a.stack[0] = env->b.stack[0];
+	++env->a.size;
+	--env->b.size;
+}
+
+void		pb(t_env *env)
+{
+	if (env->a.size == 0)
+		return ;
+	down_slide(env->b.stack, env->b.size);
+	env->b.stack[0] = env->a.stack[0];
+	++env->b.size;
+	--env->a.size;
 }
