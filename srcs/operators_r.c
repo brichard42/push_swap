@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operators2.c                                       :+:      :+:    :+:   */
+/*   operators_r.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 15:57:45 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/13 15:06:35 by brichard         ###   ########.fr       */
+/*   Created: 2019/05/13 17:48:49 by brichard          #+#    #+#             */
+/*   Updated: 2019/05/13 17:48:52 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void		pa(t_env *env)
+void	ra(t_env *env)
 {
-	if (env->b.size == 0 || env->size == 0)
+	int tmp;
+
+	if (env->a.size < 2)
 		return ;
-	++env->a.size;
-	down_slide(env->a.stack, env->a.size);
-	env->a.stack[0] = env->b.stack[0];
-	up_slide(env->b.stack, env->b.size);
-	--env->b.size;
+	tmp = env->a.stack[0];
+	up_slide(env->a.stack, env->a.size);
+	env->a.stack[env->a.size - 1] = tmp;
 }
 
-void		pb(t_env *env)
+void	rb(t_env *env)
 {
-	if (env->a.size == 0 || env->size == 0)
+	int tmp;
+
+	if (env->b.size < 2)
 		return ;
-	++env->b.size;
-	down_slide(env->b.stack, env->b.size);
-	env->b.stack[0] = env->a.stack[0];
-	up_slide(env->a.stack, env->a.size);
-	--env->a.size;
+	tmp = env->b.stack[0];
+	up_slide(env->b.stack, env->b.size);
+	env->b.stack[env->b.size - 1] = tmp;
+}
+
+void	rr(t_env *env)
+{
+	ra(env);
+	rb(env);
 }

@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/05/13 14:38:04 by brichard         ###   ########.fr        #
+#    Updated: 2019/05/13 17:52:22 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,11 +62,11 @@ INC_FILES =		checker.h
 #                                   SRCS_FILES                                 #
 ################################################################################
 
-SRCS_FILES =	main.c \
-				operators.c \
-				operators2.c \
-				operators3.c \
-				operators4.c \
+SRCS_FILES =	checker.c \
+				operators_s.c \
+				operators_p.c \
+				operators_r.c \
+				operators_rr.c \
 				slide.c \
 
 ################################################################################

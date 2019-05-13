@@ -6,10 +6,16 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:10:08 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/13 15:09:52 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:15:12 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "checker.h"
+
+int	exit_malloc(void)
+{
+	ft_putendl("Oups, a malloc just crashed ..");
+	exit(-1);
+}
 
 int	usage(void)
 {
@@ -43,22 +49,58 @@ void	print_stack(char name, t_stack *stack)
 		++i;
 	}
 }
+
+int		ft_atoi_move(char **str)
+{
+	long long	neg;
+	long long	num;
+
+	neg = 1;
+	num = 0;
+	while (**str == ' ')
+		++str;
+	if (**str == '+' || **str == '-')
+	{
+		if (**str == '-')
+			neg *= -1;
+		++str;
+	}
+	while (**str >= '0' && **str <= '9')
+	{
+		num = num * 10 + (**str - '0') * neg;
+		if (num > 0 && neg == -1)
+			return (0);
+		if (num < 0 && neg == 1)
+			return (-1);
+		++str;
+	}
+	return ((int)num);
+}
+
 int	main(int ac, char **av)
 {
 	t_env	env;
 	t_op	op_tab[11];
 
-	init_op_tab(op_tab);
 	if (ac < 2)
 		return (usage());
-	(void)av;
+	while (*av[1])
+	{
+		*env.a.stack = ft_atoi_move(&av[1]);
+		ft_printf("%d", env.a.stack);
+	}
+	init_op_tab(op_tab);
+	return (0);
+}
+
+/*
 	env.size = 5;
 	env.a.size = 5;
 	env.b.size = 0;
 	if (!(env.a.stack = ft_memalloc(sizeof(int) * env.size)))
-		exit (0);
+		exit_malloc();
 	if (!(env.b.stack = ft_memalloc(sizeof(int) * env.size)))
-		exit (0);
+		exit_malloc();
 	env.a.stack[0] = 5;
 	env.a.stack[1] = 4;
 	env.a.stack[2] = 3;
@@ -71,21 +113,4 @@ int	main(int ac, char **av)
 	ft_printf("-------\n");
 	print_stack('a', &env.a);
 	print_stack('b', &env.b);
-	pb(&env);
-	ft_printf("-------\n");
-	print_stack('a', &env.a);
-	print_stack('b', &env.b);
-	pb(&env);
-	ft_printf("-------\n");
-	print_stack('a', &env.a);
-	print_stack('b', &env.b);
-	rb(&env);
-	ft_printf("-------\n");
-	print_stack('a', &env.a);
-	print_stack('b', &env.b);
-	rrb(&env);
-	ft_printf("-------\n");
-	print_stack('a', &env.a);
-	print_stack('b', &env.b);
-	return (0);
-}
+	*/
