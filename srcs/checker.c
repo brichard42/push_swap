@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:10:08 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/13 18:15:12 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:56:44 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "checker.h"
@@ -38,43 +38,45 @@ void	init_op_tab(t_op *op_tab)
 	op_tab[10] = rrr;
 }
 
-void	print_stack(char name, t_stack *stack)
+void	print_stack(char name, t_stack stack)
 {
 	size_t i;
 	
 	i = 0;
-	while (i < stack->size)
+	while (i < stack.size)
 	{
-		ft_printf("%c_stack[%d] = %d\n", name, i, stack->stack[i]);
+		ft_printf("%c_stack[%d] = %d\n", name, i, stack.stack[i]);
 		++i;
 	}
 }
 
-int		ft_atoi_move(char **str)
+int		parse_arg(t_env *env, int ac, char **av)
 {
-	long long	neg;
-	long long	num;
+	int	i;
+	int	j;
 
-	neg = 1;
-	num = 0;
-	while (**str == ' ')
-		++str;
-	if (**str == '+' || **str == '-')
+	i = 1;
+	while (i < ac)
 	{
-		if (**str == '-')
-			neg *= -1;
-		++str;
+		j = 0;
+		while (av[i][j])
+		{
+			if (ft_isdigit(av[i][j]))
+			{
+				if (!(ft_int_realloc(&(env->a.stack), &(env->a.size), ft_atoi(av[i] + j))))
+					exit_malloc();
+				while (av[i][j] && ft_isdigit(av[i][j]))
+					++j;
+				--j;
+			}
+			else if (av[i][j] != ' ' || av[i][j] != '\0')
+				return (usage());
+			++j;
+		}
+		++i;
 	}
-	while (**str >= '0' && **str <= '9')
-	{
-		num = num * 10 + (**str - '0') * neg;
-		if (num > 0 && neg == -1)
-			return (0);
-		if (num < 0 && neg == 1)
-			return (-1);
-		++str;
-	}
-	return ((int)num);
+	print_stack('a', env->a);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -82,35 +84,15 @@ int	main(int ac, char **av)
 	t_env	env;
 	t_op	op_tab[11];
 
+	env.a.stack = NULL;
+	env.b.stack = NULL;
+	env.a.size = 0;
+	env.b.size = 0;
+	env.size = 0;
 	if (ac < 2)
 		return (usage());
-	while (*av[1])
-	{
-		*env.a.stack = ft_atoi_move(&av[1]);
-		ft_printf("%d", env.a.stack);
-	}
+	if (!(parse_arg(&env, ac, av)))
+		return (0);
 	init_op_tab(op_tab);
 	return (0);
 }
-
-/*
-	env.size = 5;
-	env.a.size = 5;
-	env.b.size = 0;
-	if (!(env.a.stack = ft_memalloc(sizeof(int) * env.size)))
-		exit_malloc();
-	if (!(env.b.stack = ft_memalloc(sizeof(int) * env.size)))
-		exit_malloc();
-	env.a.stack[0] = 5;
-	env.a.stack[1] = 4;
-	env.a.stack[2] = 3;
-	env.a.stack[3] = 2;
-	env.a.stack[4] = 1;
-	ft_printf("-------\n");
-	print_stack('a', &env.a);
-	print_stack('b', &env.b);
-	pb(&env);
-	ft_printf("-------\n");
-	print_stack('a', &env.a);
-	print_stack('b', &env.b);
-	*/
