@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ps_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/16 17:23:17 by brichard         ###   ########.fr       */
+/*   Created: 2019/05/16 16:36:18 by brichard          #+#    #+#             */
+/*   Updated: 2019/05/16 17:35:32 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef PS_STRUCT_H
+# define PS_STRUCT_H
 
-# include "ps_parsing.h"
-# include "ps_t_op.h"
-# include "print.h"
+# include <stdlib.h>
+
+typedef struct	s_stack
+{
+	size_t	size;
+	int		*stack;
+}				t_stack;
+
+typedef struct	s_env
+{
+	size_t	size;
+	t_stack	a;
+	t_stack	b;
+}				t_env;
 
 #endif

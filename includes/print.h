@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/16 17:23:17 by brichard         ###   ########.fr       */
+/*   Created: 2019/05/16 17:25:25 by brichard          #+#    #+#             */
+/*   Updated: 2019/05/16 17:31:04 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef PRINT_H
+# define PRINT_H
 
-# include "ps_parsing.h"
-# include "ps_t_op.h"
-# include "print.h"
+# include <stdlib.h>
+# include "ps_struct.h"
+# include "../libft/includes/libft.h"
+
+int			usage(void);
+void		print_stack(char name, t_stack stack);
 
 #endif

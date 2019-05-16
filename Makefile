@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/05/13 17:52:22 by brichard         ###   ########.fr        #
+#    Updated: 2019/05/16 17:49:33 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,9 @@ SRCS_FILES =	checker.c \
 				operators_r.c \
 				operators_rr.c \
 				slide.c \
+				ps_op_tab.c \
+				ps_parsing.c \
+				print.c \
 
 ################################################################################
 #                                    COlORS                                    #
