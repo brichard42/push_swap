@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:23:43 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/16 17:27:32 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:04:02 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			usage(void)
 {
-	ft_putendl("Format Error. Usage: ./checker [num1 num2 num3 ..]");
+	ft_putendl("Error.");
 	return (0);
 }
 

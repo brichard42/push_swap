@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 16:19:24 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/16 18:04:32 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/17 11:05:58 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			rra(t_env *env);
 void			rrb(t_env *env);
 void			rrr(t_env *env);
 
-void			ps_init_op_tab(t_op *op_tab);
+void			ps_init_op_tab(t_op *op_tab, size_t size);
 int				ps_hach(char *op);
 
 #endif

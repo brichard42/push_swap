@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/16 17:23:17 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/17 12:51:28 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "ps_parsing.h"
 # include "ps_t_op.h"
 # include "print.h"
+# include <limits.h>
 
 #endif
