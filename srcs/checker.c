@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:03:44 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/17 15:16:24 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:13:44 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,27 @@ int			main(int ac, char **av)
 		return (usage());
 	ft_bzero((void*)&env, sizeof(t_env));
 	if (!(parse_arg(&env, ac, av)))
+	{
+		ft_memdel((void*)&env.a.stack);
+		ft_memdel((void*)&env.b.stack);
 		return (usage());
+	}
 	print_stack('a', env.a);
 	ps_init_op_tab(op_tab, OP_SIZE);
 	while (get_next_line(0, &line, '\n') > 0)
 	{
 		if (op_tab[ps_hach(line)] != NULL)
-		{
 			op_tab[ps_hach(line)](&env);
-			print_stack('a', env.a);
-			print_stack('b', env.b);
-			ft_strdel(&line);
-		}
 		else
 		{
 			ft_strdel(&line);
+			ft_memdel((void*)&env.a.stack);
+			ft_memdel((void*)&env.b.stack);
 			return (usage());
 		}
+		print_stack('a', env.a);
+		print_stack('b', env.b);
+		ft_strdel(&line);
 	}
 	ps_check_sort(&env);
 	ft_memdel((void*)&env.a.stack);

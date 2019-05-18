@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:44:43 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/17 13:30:34 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:02:34 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 
 int			ps_hach(char *op)
 {
-/*	size_t	s;
-	size_t	i;
-	int		res;
-
-	if (op == NULL)
-		return (0);
-	res = 0;
-	s = ft_strlen(op);
-	i = 0;
-	while (i < s && i < 3)
-		res += op[i++];
-	res += op[--i];
-	ft_printf("%s | %d\n", op, res);
-	return (res);*/
 	if (ft_strequ(op, "pa"))
 		return (0);
 	else if (ft_strequ(op, "pb"))
