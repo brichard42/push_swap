@@ -6,14 +6,12 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:14:38 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/18 18:09:37 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:59:09 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #define OP_SIZE 650
-
-
 
 int	main(int ac, char **av)
 {
@@ -30,7 +28,7 @@ int	main(int ac, char **av)
 		return (usage());
 	}
 	ps_init_op_tab(op_tab, OP_SIZE);
-	print_stack('a', env.a);
-	print_stack('b', env.b);
+	print_stack(env.a, env.b);
+	ft_printf("______{%d}______\n", ps_partition(&env, 0, env.size - 1, 0));
 	return (0);
 }
