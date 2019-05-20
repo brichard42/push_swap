@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:14:38 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/19 18:59:09 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:54:38 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	main(int ac, char **av)
 {
 	t_env	env;
-	t_op	op_tab[OP_SIZE];
+//	t_op	op_tab[OP_SIZE];
 
 	if (ac < 2)
 		return (usage());
@@ -27,8 +27,9 @@ int	main(int ac, char **av)
 		ft_memdel((void*)&env.b.stack);
 		return (usage());
 	}
-	ps_init_op_tab(op_tab, OP_SIZE);
+//	ps_init_op_tab(op_tab, OP_SIZE);
 	print_stack(env.a, env.b);
-	ft_printf("______{%d}______\n", ps_partition(&env, 0, env.size - 1, 0));
+//	ft_printf("______{%d}______\n", ps_partition(&env, 0, env.size - 1, 0));
+	ps_quicksort(&env, 0, env.size - 1, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:23:43 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/19 14:59:21 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/20 14:51:55 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		print_stack(t_stack a, t_stack b)
 	size_t i;
 
 	i = 0;
-	system("clear");
+	ft_putstr("\e[1;1H\e[2J");
 	ft_printf("\tA\t|\tB\t\n   ----------------------------\n");
 	while (i < a.size || i < b.size)
 	{
