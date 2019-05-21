@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:03:44 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/19 14:57:04 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/21 15:00:20 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int			main(int ac, char **av)
 			ft_memdel((void*)&env.b.stack);
 			return (usage());
 		}
-		print_stack(env.a, env.b);
 		ft_strdel(&line);
 	}
+	print_stack(env.a, env.b);
 	ps_check_sort(&env);
 	ft_memdel((void*)&env.a.stack);
 	ft_memdel((void*)&env.b.stack);

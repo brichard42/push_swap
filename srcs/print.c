@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:23:43 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/20 14:51:55 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:21:38 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void		print_stack(t_stack a, t_stack b)
 			ft_printf("%d |\t \t\t%d\t\n", i, b.stack[i]);
 		++i;
 	}
-	sleep(1);
+	//sleep(1);
 }
