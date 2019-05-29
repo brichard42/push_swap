@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:16:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/21 12:33:26 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:33:49 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # include "print.h"//to delete
 
 void	ps_quicksort(t_env *env, int high, int id);
+void	ps_sort_case(t_env *env, int high, int id);
 
 #endif

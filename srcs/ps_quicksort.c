@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/21 15:27:33 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:29:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 	int	pivot;
 	int	i;
 	int	push;
+	int	max_push;
 
 	if (id == 0)
 		pivot = get_median(env->a, high);
@@ -58,15 +59,16 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 	//sleep(2);
 	i = 0;
 	push = 0;
-	while (i <= high)
+	max_push =  ((high + 1) % 2 == 0 ? 0 : 1) + (high + 1) / 2;
+	while (i <= high && push < max_push)
 	{	
 		if (id == 0 && *env->a.stack <= pivot && ++push)
 			pb(env);
-		else if (id == 1 && *env->b.stack >= pivot && ++push)
+		else if (id == 1 && *env->b.stack > pivot && ++push)
 			pa(env);
 		else if (id == 0 && *env->a.stack > pivot && ++(*rot))
 			ra(env);
-		else if (id == 1 && *env->b.stack < pivot && ++(*rot))
+		else if (id == 1 && *env->b.stack <= pivot && ++(*rot))
 			rb(env);
 		++i;
 	}
@@ -77,6 +79,7 @@ void		ps_inverse_rotate(t_env *env, int high, int id, int rot)
 {
 //	ft_printf("rot %d\n", rot);
 	//sleep(1);
+	(void)high;
 	while (rot)
 	{
 		if (id == 0)
@@ -97,28 +100,13 @@ void		ps_quicksort(t_env *env, int high, int id)
 //	else
 //		ft_printf("quick B\n");
 	//sleep(1);
-	if (high  < 1)
-		return ;
-	if (id == 0 && high == 1)
-	{
-		if (env->a.stack[0] > env->a.stack[1])
-			sa(env);
-		return ;
-	}
-	else if (id == 1 && high == 1)
-	{
-		if (env->b.stack[0] < env->b.stack[1])
-				sb(env);
-		return ;
-	}
+	if (high  < 2 || ((id == 0 && env->a.size <= 3) || (id == 1 && env->b.size <= 3)))
+		return (ps_sort_case(env, high, id));
 	rot = 0;
 	p_i = ps_partition(env, high, id, &rot);
 	ps_inverse_rotate(env, high, id, rot);
-	if (high > 0)
-	{
-		ps_quicksort(env, high - p_i, (id == 0 ? 0 : 1));
-		ps_quicksort(env, p_i - 1, (id == 0 ? 1 : 0));
-	}
+	ps_quicksort(env, high - p_i, (id == 0 ? 0 : 1));
+	ps_quicksort(env, p_i - 1, (id == 0 ? 1 : 0));
 //	if (id == 0)
 //		ft_printf("roll A\n");
 //	else
