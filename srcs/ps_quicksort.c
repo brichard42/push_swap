@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/29 18:29:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/30 11:58:58 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		ps_quicksort(t_env *env, int high, int id)
 //	else
 //		ft_printf("quick B\n");
 	//sleep(1);
-	if (high  < 2 || ((id == 0 && env->a.size <= 3) || (id == 1 && env->b.size <= 3)))
+	if (high  < 3)
 		return (ps_sort_case(env, high, id));
 	rot = 0;
 	p_i = ps_partition(env, high, id, &rot);

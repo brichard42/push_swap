@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:34:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/29 17:33:56 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/30 11:57:38 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,39 @@ static void	ps_sort_three_0(t_env *env, int cases)
 {
 	if (cases == 2)
 	{
-		rra(env);
+		ra(env);
 		sa(env);
+		rra(env);
+//		rra(env);
+//		sa(env);
 	}
 	else if (cases == 3)
 		sa(env);
 	else if (cases == 4)
-		rra(env);
-	else if (cases == 5)
+	{
 		ra(env);
+		sa(env);
+		rra(env);
+		sa(env);
+	}
+//		rra(env);
+	else if (cases == 5)
+	{
+		sa(env);
+		ra(env);
+		sa(env);
+		rra(env);
+	}
+//		ra(env);
 	else if (cases == 6)
 	{
 		sa(env);
+		ra(env);
+		sa(env);
 		rra(env);
+		sa(env);
+//		sa(env);
+//		rra(env);
 	}
 }
 
@@ -52,19 +72,39 @@ static void	ps_sort_three_1(t_env *env, int cases)
 {
 	if (cases == 1)
 	{
+		sb(env);
 		rb(env);
 		sb(env);
+		rrb(env);
+		sb(env);
+//		rb(env);
+//		sb(env);
 	}
 	else if (cases == 2)
+	{
+		sb(env);
 		rb(env);
-	else if (cases == 3)
+		sb(env);
 		rrb(env);
+	}
+//		rb(env);
+	else if (cases == 3)
+	{
+		rb(env);
+		sb(env);
+		rrb(env);
+		sb(env);
+	}
+//		rrb(env);
 	else if (cases == 4)
 		sb(env);
 	else if (cases == 5)
 	{
-		sb(env);
 		rb(env);
+		sb(env);
+		rrb(env);
+//		sb(env);
+//		rb(env);
 	}
 }
 
