@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:48:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/21 14:52:09 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/30 12:20:18 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void		pa(t_env *env)
 	env->a.stack[0] = env->b.stack[0];
 	up_slide(env->b.stack, env->b.size);
 	--env->b.size;
-//	print_stack(env->a, env->b);
 }
 
 void		pb(t_env *env)
@@ -35,5 +34,4 @@ void		pb(t_env *env)
 	env->b.stack[0] = env->a.stack[0];
 	up_slide(env->a.stack, env->a.size);
 	--env->a.size;
-//	print_stack(env->a, env->b);
 }

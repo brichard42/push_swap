@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:03:44 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/29 18:30:05 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/30 12:36:30 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			main(int ac, char **av)
 	char	*line;
 
 	if (ac < 2)
-		return (usage());
+		return (0);
 	ft_bzero((void*)&env, sizeof(t_env));
 	if (!(parse_arg(&env, ac, av)))
 	{

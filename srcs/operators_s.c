@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:49:12 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/21 14:51:04 by brichard         ###   ########.fr       */
+/*   Updated: 2019/05/30 12:20:18 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	sa(t_env *env)
 	tmp = env->a.stack[0];
 	env->a.stack[0] = env->a.stack[1];
 	env->a.stack[1] = tmp;
-	//print*_stack(env->a, env->b);
 }
 
 void	sb(t_env *env)
@@ -35,7 +34,6 @@ void	sb(t_env *env)
 	tmp = env->b.stack[0];
 	env->b.stack[0] = env->b.stack[1];
 	env->b.stack[1] = tmp;
-	//print*_stack(env->a, env->b);
 }
 
 void	ss(t_env *env)
@@ -43,5 +41,4 @@ void	ss(t_env *env)
 	ft_putendl("ss");
 	sa(env);
 	sb(env);
-	//print*_stack(env->a, env->b);
 }
