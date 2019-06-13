@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:03:44 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/30 12:36:30 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/13 13:25:05 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			main(int ac, char **av)
 	while (get_next_line(0, &line, '\n') > 0)
 	{
 		if (op_tab[ps_hach(line)] != NULL)
-			op_tab[ps_hach(line)](&env);
+			op_tab[ps_hach(line)](&env, NULL);
 		else
 		{
 			ft_strdel(&line);

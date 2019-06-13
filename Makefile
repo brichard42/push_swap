@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/05/23 14:32:47 by brichard         ###   ########.fr        #
+#    Updated: 2019/06/13 13:59:10 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRCS_FILES =	push_swap.c \
 				print.c \
 				ps_quicksort.c \
 				ps_sort_case.c \
+				ps_save.c
 
 SRCS_FILES_C =	checker.c \
 				operators_s.c \

@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/30 11:58:58 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:59:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 	while (i <= high && push < max_push)
 	{	
 		if (id == 0 && *env->a.stack <= pivot && ++push)
-			pb(env);
+			pb(env, ps_save);
 		else if (id == 1 && *env->b.stack > pivot && ++push)
-			pa(env);
+			pa(env, ps_save);
 		else if (id == 0 && *env->a.stack > pivot && ++(*rot))
-			ra(env);
+			ra(env, ps_save);
 		else if (id == 1 && *env->b.stack <= pivot && ++(*rot))
-			rb(env);
+			rb(env, ps_save);
 		++i;
 	}
 	return (push);
@@ -83,9 +83,9 @@ void		ps_inverse_rotate(t_env *env, int high, int id, int rot)
 	while (rot)
 	{
 		if (id == 0)
-			rra(env);
+			rra(env, ps_save);
 		else
-			rrb(env);
+			rrb(env, ps_save);
 		--rot;
 	}
 }
@@ -115,9 +115,9 @@ void		ps_quicksort(t_env *env, int high, int id)
 	while (p_i)
 	{
 		if (id == 0)
-			pa(env);
+			pa(env, ps_save);
 		else
-			pb(env);
+			pb(env, ps_save);
 		--p_i;
 	}
 }

@@ -6,17 +6,18 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:49:12 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/30 12:20:18 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:22:20 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	sa(t_env *env)
+void	sa(t_env *env, void (*f)(t_env *, char *))
 {
 	int tmp;
 
-	ft_putendl("sa");
+	if (f)
+		f(env, "sa");
 	if (env->a.size < 2)
 		return ;
 	tmp = env->a.stack[0];
@@ -24,11 +25,12 @@ void	sa(t_env *env)
 	env->a.stack[1] = tmp;
 }
 
-void	sb(t_env *env)
+void	sb(t_env *env, void (*f)(t_env *, char *))
 {
 	int tmp;
 
-	ft_putendl("sb");
+	if (f)
+		f(env, "sb");
 	if (env->b.size < 2)
 		return ;
 	tmp = env->b.stack[0];
@@ -36,9 +38,10 @@ void	sb(t_env *env)
 	env->b.stack[1] = tmp;
 }
 
-void	ss(t_env *env)
+void	ss(t_env *env, void (*f)(t_env *, char *))
 {
-	ft_putendl("ss");
-	sa(env);
-	sb(env);
+	if (f)
+		f(env, "ss");
+	sa(env, NULL);
+	sb(env, NULL);
 }

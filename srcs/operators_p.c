@@ -6,15 +6,16 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:48:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/30 12:20:18 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:22:32 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void		pa(t_env *env)
+void		pa(t_env *env, void (*f)(t_env *, char *))
 {
-	ft_putendl("pa");
+	if (f)
+		f(env, "pa");
 	if (env->b.size == 0 || env->size == 0)
 		return ;
 	++env->a.size;
@@ -24,9 +25,10 @@ void		pa(t_env *env)
 	--env->b.size;
 }
 
-void		pb(t_env *env)
+void		pb(t_env *env, void (*f)(t_env *, char*))
 {
-	ft_putendl("pb");
+	if (f)
+		f(env, "pb");
 	if (env->a.size == 0 || env->size == 0)
 		return ;
 	++env->b.size;
