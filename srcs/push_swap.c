@@ -6,13 +6,13 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:14:38 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/14 15:12:43 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:02:35 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_inst(t_dlist *inst)
+static void	print_inst(t_dlist *inst)
 {
 	if (!inst)
 		return ;
@@ -21,7 +21,34 @@ void	print_inst(t_dlist *inst)
 	ft_putendl((char*)inst->content);
 }
 
-int	main(int ac, char **av)
+static void	ps_replace_ss(t_dlist *inst)
+{
+	t_dlist	*tmp;
+
+	tmp = inst->next;
+	inst->next = inst->next->next;
+	if (inst->next->next)
+		inst->next->next->prev = inst;
+	free(tmp->content); //FAUT FOUTRE LA MEM A ZERO GROS PORC
+	free(tmp); //FAUT FOUTRE LA MEM A ZERO GROS PORC
+	ft_strcpy((char*)inst->content, "ss");
+}
+
+static void	ps_check_inst(t_dlist **inst)
+{
+	if (!inst || !(*inst))
+		return ;
+	if ((*inst)->next)
+	{
+		if (ft_strequ("sa", (char*)(*inst)->content) && ft_strequ("sb", (char*)(*inst)->next->content))
+			ps_replace_ss(*inst);
+		else if (ft_strequ("sb", (char*)(*inst)->content) && ft_strequ("sa", (char*)(*inst)->next->content))
+			ps_replace_ss(*inst);
+		ps_check_inst(&(*inst)->next);
+	}
+}
+
+int			main(int ac, char **av)
 {
 	t_env	env;
 
@@ -35,6 +62,8 @@ int	main(int ac, char **av)
 		return (usage());
 	}
 	ps_quicksort(&env, env.size - 1, 0);
+	ps_check_inst(&env.inst);
 	print_inst(env.inst);
+	system("leaks push_swap");
 	return (0);
 }
