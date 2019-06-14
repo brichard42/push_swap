@@ -6,11 +6,20 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:14:38 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/30 12:51:25 by brichard         ###   ########.fr       */
+/*   Updated: 2019/06/14 15:12:43 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	print_inst(t_dlist *inst)
+{
+	if (!inst)
+		return ;
+	if (inst->next)
+		print_inst(inst->next);
+	ft_putendl((char*)inst->content);
+}
 
 int	main(int ac, char **av)
 {
@@ -26,5 +35,6 @@ int	main(int ac, char **av)
 		return (usage());
 	}
 	ps_quicksort(&env, env.size - 1, 0);
+	print_inst(env.inst);
 	return (0);
 }
