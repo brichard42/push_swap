@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:34:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/13 13:38:23 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:33:28 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	ps_sort_three_0(t_env *env, int cases)
 		ra(env, ps_save);
 		sa(env, ps_save);
 		rra(env, ps_save);
-//		rra(env, ps_save);
-//		sa(env, ps_save);
 	}
 	else if (cases == 3)
 		sa(env, ps_save);
@@ -47,7 +45,6 @@ static void	ps_sort_three_0(t_env *env, int cases)
 		rra(env, ps_save);
 		sa(env, ps_save);
 	}
-//		rra(env, ps_save);
 	else if (cases == 5)
 	{
 		sa(env, ps_save);
@@ -55,7 +52,6 @@ static void	ps_sort_three_0(t_env *env, int cases)
 		sa(env, ps_save);
 		rra(env, ps_save);
 	}
-//		ra(env, ps_save);
 	else if (cases == 6)
 	{
 		sa(env, ps_save);
@@ -63,8 +59,6 @@ static void	ps_sort_three_0(t_env *env, int cases)
 		sa(env, ps_save);
 		rra(env, ps_save);
 		sa(env, ps_save);
-//		sa(env, ps_save);
-//		rra(env, ps_save);
 	}
 }
 
@@ -77,8 +71,6 @@ static void	ps_sort_three_1(t_env *env, int cases)
 		sb(env, ps_save);
 		rrb(env, ps_save);
 		sb(env, ps_save);
-//		rb(env, ps_save);
-//		sb(env, ps_save);
 	}
 	else if (cases == 2)
 	{
@@ -87,7 +79,6 @@ static void	ps_sort_three_1(t_env *env, int cases)
 		sb(env, ps_save);
 		rrb(env, ps_save);
 	}
-//		rb(env, ps_save);
 	else if (cases == 3)
 	{
 		rb(env, ps_save);
@@ -95,7 +86,6 @@ static void	ps_sort_three_1(t_env *env, int cases)
 		rrb(env, ps_save);
 		sb(env, ps_save);
 	}
-//		rrb(env, ps_save);
 	else if (cases == 4)
 		sb(env, ps_save);
 	else if (cases == 5)
@@ -103,22 +93,75 @@ static void	ps_sort_three_1(t_env *env, int cases)
 		rb(env, ps_save);
 		sb(env, ps_save);
 		rrb(env, ps_save);
-//		sb(env, ps_save);
-//		rb(env, ps_save);
 	}
 }
 
-static void	ps_sort_three(t_env *env, int id)
+static void	ps_sort_three_glob(t_env *env, int id)
 {
 	int	cases;
-	t_stack	stck;
+	t_stack	x;
 
-	stck = (id == 0 ? env->a : env->b);
-	cases = ps_three_case_table(stck.stack[0], stck.stack[1], stck.stack[2]);
 	if (id == 0)
+	{
+		x = env->a;
+		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
 		ps_sort_three_0(env, cases);
+	}
 	else if (id == 1)
+	{
+		x = env->b;
+		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
 		ps_sort_three_1(env, cases);
+	}
+}
+
+static void	ps_sort_three_little(t_env *env, int id)
+{
+	int	cases;
+	t_stack	x;
+
+	if (id == 0)
+	{
+		x = env->a;
+		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
+		if (cases == 2)
+		{
+			sa(env, ps_save);
+			rra(env, ps_save);
+		}
+		else if (cases == 3)
+			sa(env, ps_save);
+		else if (cases == 4)
+			rra(env, ps_save);
+		else if (cases == 5)
+			ra(env, ps_save);
+		else if (cases == 6)
+		{
+			sa(env, ps_save);
+			rra(env, ps_save);
+		}
+	}
+	else
+	{
+		x = env->b;
+		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
+		if (cases == 1)
+		{
+			sb(env, ps_save);
+			rrb(env, ps_save);
+		}
+		else if (cases == 2)
+			rb(env, ps_save);
+		else if (cases == 3)
+			rrb(env, ps_save);
+		else if (cases == 4)
+			sb(env, ps_save);
+		else if (cases == 5)
+		{
+			rrb(env, ps_save);
+			sb(env, ps_save);
+		}
+	}
 }
 
 void		ps_sort_case(t_env *env, int high, int id)
@@ -130,6 +173,8 @@ void		ps_sort_case(t_env *env, int high, int id)
 		else if (id == 1 && env->b.stack[0] < env->b.stack[1])
 			sb(env, ps_save);
 	}
-	else if (high == 2)
-		ps_sort_three(env, id);
+	else if (high == 2 && ((id == 0 && (int)env->a.size != high + 1) || (id == 1 && (int)env->b.size != high + 1)))
+		ps_sort_three_glob(env, id);
+	else
+		ps_sort_three_little(env, id); // C'ESTBUGGY
 }

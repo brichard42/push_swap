@@ -1,0 +1,197 @@
+#!/bin/bash
+
+test_num=$1
+
+make_1_arg ()
+{
+	ARG=`ruby -e "puts (1..1).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
+}
+
+make_5_arg ()
+{
+	ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
+}
+
+make_10_arg ()
+{
+	ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
+}
+
+make_100_arg ()
+{
+	ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
+}
+
+make_500_arg ()
+{
+	ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
+}
+
+make_1000_arg ()
+{
+	ARG=`ruby -e "puts (1..1000).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
+}
+
+test_1 ()
+{
+	count=0
+	max=0
+	min=0
+	while [ $count -le $test_num ]
+	do
+		ret=$( make_1_arg )
+		if [ $ret -le $min ] || [ $min -eq 0 ]; then
+			min=$ret
+		fi
+		if [ $ret -ge $max ]; then
+			max=$ret
+		fi
+		ave=$(($ave + $ret))
+		((count++))
+	done
+
+	ave=$(($ave / count))
+	echo FOR 1 VAR
+	printf "Min ops =\t%d\n" $min
+	printf "Max ops =\t%d\n" $max
+	printf "Average ops =\t%d\n" $ave
+	echo
+}
+
+test_5 ()
+{
+	count=0
+	max=0
+	min=0
+	while [ $count -le $test_num ]
+	do
+		ret=$( make_5_arg )
+		if [ $ret -le $min ] || [ $min -eq 0 ]; then
+			min=$ret
+		fi
+		if [ $ret -ge $max ]; then
+			max=$ret
+		fi
+		ave=$(($ave + $ret))
+		((count++))
+	done
+
+	ave=$(($ave / count))
+	echo FOR 5 VAR
+	printf "Min ops =\t%d\n" $min
+	printf "Max ops =\t%d\n" $max
+	printf "Average ops =\t%d\n" $ave
+	echo
+}
+
+test_10 ()
+{
+	count=0
+	max=0
+	min=0
+	while [ $count -le $test_num ]
+	do
+		ret=$( make_10_arg )
+		if [ $ret -le $min ] || [ $min -eq 0 ]; then
+			min=$ret
+		fi
+		if [ $ret -ge $max ]; then
+			max=$ret
+		fi
+		ave=$(($ave + $ret))
+		((count++))
+	done
+
+	ave=$(($ave / count))
+	echo FOR 10 VAR
+	printf "Min ops =\t%d\n" $min
+	printf "Max ops =\t%d\n" $max
+	printf "Average ops =\t%d\n" $ave
+	echo
+}
+
+test_100 ()
+{
+	count=0
+	max=0
+	min=0
+	while [ $count -le $test_num ]
+	do
+		ret=$( make_100_arg )
+		if [ $ret -le $min ] || [ $min -eq 0 ]; then
+			min=$ret
+		fi
+		if [ $ret -ge $max ]; then
+			max=$ret
+		fi
+		ave=$(($ave + $ret))
+		((count++))
+	done
+
+	ave=$(($ave / count))
+	echo FOR 100 VAR
+	printf "Min ops =\t%d\n" $min
+	printf "Max ops =\t%d\n" $max
+	printf "Average ops =\t%d\n" $ave
+	echo
+}
+
+test_500 ()
+{
+	count=0
+	max=0
+	min=0
+	while [ $count -le $test_num ]
+	do
+		ret=$( make_500_arg )
+		if [ $ret -le $min ] || [ $min -eq 0 ]; then
+			min=$ret
+		fi
+		if [ $ret -ge $max ]; then
+			max=$ret
+		fi
+		ave=$(($ave + $ret))
+		((count++))
+	done
+
+	ave=$(($ave / count))
+	echo FOR 500 VAR
+	printf "Min ops =\t%d\n" $min
+	printf "Max ops =\t%d\n" $max
+	printf "Average ops =\t%d\n" $ave
+	echo
+}
+
+test_1000 ()
+{
+	count=0
+	max=0
+	min=0
+	while [ $count -le $test_num ]
+	do
+		ret=$( make_1000_arg )
+		if [ $ret -le $min ] || [ $min -eq 0 ]; then
+			min=$ret
+		fi
+		if [ $ret -ge $max ]; then
+			max=$ret
+		fi
+		ave=$(($ave + $ret))
+		((count++))
+	done
+
+	ave=$(($ave / count))
+	echo FOR 1000 VAR
+	printf "Min ops =\t%d\n" $min
+	printf "Max ops =\t%d\n" $max
+	printf "Average ops =\t%d\n" $ave
+	echo
+}
+
+test_1 &
+test_5 &
+test_10 &
+test_100 &
+test_500 &
+test_1000 &
+wait

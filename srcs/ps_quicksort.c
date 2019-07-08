@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/13 15:59:08 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:32:45 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,9 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 		pivot = get_median(env->a, high);
 	else
 		pivot = get_median(env->b, high);
-//	ft_printf("pivot = %d\n", pivot);
-//	ft_printf("Nelem %d\n", high + 1);
-	//sleep(2);
 	i = 0;
 	push = 0;
-	max_push =  ((high + 1) % 2 == 0 ? 0 : 1) + (high + 1) / 2;
+	max_push = (high + 1) % 2 + (high + 1) / 2;
 	while (i <= high && push < max_push)
 	{	
 		if (id == 0 && *env->a.stack <= pivot && ++push)
@@ -77,9 +74,6 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 
 void		ps_inverse_rotate(t_env *env, int high, int id, int rot)
 {
-//	ft_printf("rot %d\n", rot);
-	//sleep(1);
-	(void)high;
 	while (rot)
 	{
 		if (id == 0)
@@ -95,11 +89,6 @@ void		ps_quicksort(t_env *env, int high, int id)
 	int	p_i;
 	int	rot;
 
-//	if (id == 0)
-//		ft_printf("quick A\n");
-//	else
-//		ft_printf("quick B\n");
-	//sleep(1);
 	if (high  < 3)
 		return (ps_sort_case(env, high, id));
 	rot = 0;
@@ -107,11 +96,6 @@ void		ps_quicksort(t_env *env, int high, int id)
 	ps_inverse_rotate(env, high, id, rot);
 	ps_quicksort(env, high - p_i, (id == 0 ? 0 : 1));
 	ps_quicksort(env, p_i - 1, (id == 0 ? 1 : 0));
-//	if (id == 0)
-//		ft_printf("roll A\n");
-//	else
-//		ft_printf("roll B\n");
-	//sleep(1);
 	while (p_i)
 	{
 		if (id == 0)
