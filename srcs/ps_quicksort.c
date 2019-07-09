@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/08 16:32:45 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/09 11:46:26 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 	return (push);
 }
 
-void		ps_inverse_rotate(t_env *env, int high, int id, int rot)
+static void	ps_inverse_rotate(t_env *env, int id, int rot)
 {
 	while (rot)
 	{
@@ -93,7 +93,7 @@ void		ps_quicksort(t_env *env, int high, int id)
 		return (ps_sort_case(env, high, id));
 	rot = 0;
 	p_i = ps_partition(env, high, id, &rot);
-	ps_inverse_rotate(env, high, id, rot);
+	ps_inverse_rotate(env, id, rot);
 	ps_quicksort(env, high - p_i, (id == 0 ? 0 : 1));
 	ps_quicksort(env, p_i - 1, (id == 0 ? 1 : 0));
 	while (p_i)

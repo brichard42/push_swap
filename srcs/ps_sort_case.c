@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:34:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/08 18:33:28 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/09 17:34:58 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ps_three_case_table(int a, int b, int c)
 		return (2);
 	else if (a > b && b < c && a < c)
 		return (3);
-	else if (a < b && b > c && c < b)
+	else if (a < b && b > c && c < a)
 		return (4);
 	else if (a > b && b < c && c < a)
 		return (5);
@@ -127,12 +127,12 @@ static void	ps_sort_three_little(t_env *env, int id)
 		if (cases == 2)
 		{
 			sa(env, ps_save);
-			rra(env, ps_save);
+			ra(env, ps_save);
 		}
 		else if (cases == 3)
 			sa(env, ps_save);
 		else if (cases == 4)
-			rra(env, ps_save);
+			ra(env, ps_save);
 		else if (cases == 5)
 			ra(env, ps_save);
 		else if (cases == 6)
@@ -147,18 +147,29 @@ static void	ps_sort_three_little(t_env *env, int id)
 		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
 		if (cases == 1)
 		{
+			ft_printf("1 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
 			sb(env, ps_save);
 			rrb(env, ps_save);
 		}
 		else if (cases == 2)
+		{
+			ft_printf("2 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
 			rb(env, ps_save);
+		}
 		else if (cases == 3)
+		{
+			ft_printf("3 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
 			rrb(env, ps_save);
+		}
 		else if (cases == 4)
+		{
+			ft_printf("4 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
+			rrb(env, ps_save);
 			sb(env, ps_save);
+		}
 		else if (cases == 5)
 		{
-			rrb(env, ps_save);
+			ft_printf("5 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
 			sb(env, ps_save);
 		}
 	}
@@ -166,7 +177,9 @@ static void	ps_sort_three_little(t_env *env, int id)
 
 void		ps_sort_case(t_env *env, int high, int id)
 {
-	if (high == 1)
+	if (high == 0)
+		return ;
+	else if (high == 1)
 	{
 		if (id == 0 && env->a.stack[0] > env->a.stack[1])
 			sa(env, ps_save);
@@ -175,6 +188,6 @@ void		ps_sort_case(t_env *env, int high, int id)
 	}
 	else if (high == 2 && ((id == 0 && (int)env->a.size != high + 1) || (id == 1 && (int)env->b.size != high + 1)))
 		ps_sort_three_glob(env, id);
-	else
+	else if (high == 2)
 		ps_sort_three_little(env, id); // C'ESTBUGGY
 }

@@ -1,45 +1,87 @@
 #!/bin/bash
 
-test_num=$1
+if [ -z "$1" ]; then
+	inst_check_num='100'
+else
+	inst_check_num=$1
+fi
 
-make_1_arg ()
+if [ -z "$2" ]; then
+	ok_check_num='100'
+else
+	ok_check_num=$2
+fi
+
+
+inst_check_1_arg ()
 {
 	ARG=`ruby -e "puts (1..1).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
 }
 
-make_5_arg ()
+inst_check_5_arg ()
 {
 	ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
 }
 
-make_10_arg ()
+inst_check_10_arg ()
 {
 	ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
 }
 
-make_100_arg ()
+inst_check_100_arg ()
 {
 	ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
 }
 
-make_500_arg ()
+inst_check_500_arg ()
 {
 	ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
 }
 
-make_1000_arg ()
+inst_check_1000_arg ()
 {
 	ARG=`ruby -e "puts (1..1000).to_a.shuffle.join(' ')"`; ./push_swap $ARG | wc -l
 }
 
-test_1 ()
+ok_check_1_arg ()
+{
+	ARG=`ruby -e "puts (1..1).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+}
+
+ok_check_5_arg ()
+{
+	ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+}
+
+ok_check_10_arg ()
+{
+	ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+}
+
+ok_check_100_arg ()
+{
+	ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+	echo "$ARG" >> logs
+}
+
+ok_check_500_arg ()
+{
+	ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+}
+
+ok_check_1000_arg ()
+{
+	ARG=`ruby -e "puts (1..1000).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+}
+
+test_inst_1 ()
 {
 	count=0
 	max=0
 	min=0
-	while [ $count -le $test_num ]
+	while [ $count -le $inst_check_num ]
 	do
-		ret=$( make_1_arg )
+		ret=$( inst_check_1_arg )
 		if [ $ret -le $min ] || [ $min -eq 0 ]; then
 			min=$ret
 		fi
@@ -52,20 +94,17 @@ test_1 ()
 
 	ave=$(($ave / count))
 	echo FOR 1 VAR
-	printf "Min ops =\t%d\n" $min
-	printf "Max ops =\t%d\n" $max
-	printf "Average ops =\t%d\n" $ave
-	echo
+	printf "Min ops =\t%d\nMax ops =\t%d\nAverage ops =\t%d\n" $min $max $ave
 }
 
-test_5 ()
+test_inst_5 ()
 {
 	count=0
 	max=0
 	min=0
-	while [ $count -le $test_num ]
+	while [ $count -le $inst_check_num ]
 	do
-		ret=$( make_5_arg )
+		ret=$( inst_check_5_arg )
 		if [ $ret -le $min ] || [ $min -eq 0 ]; then
 			min=$ret
 		fi
@@ -78,20 +117,17 @@ test_5 ()
 
 	ave=$(($ave / count))
 	echo FOR 5 VAR
-	printf "Min ops =\t%d\n" $min
-	printf "Max ops =\t%d\n" $max
-	printf "Average ops =\t%d\n" $ave
-	echo
+	printf "Min ops =\t%d\nMax ops =\t%d\nAverage ops =\t%d\n" $min $max $ave
 }
 
-test_10 ()
+test_inst_10 ()
 {
 	count=0
 	max=0
 	min=0
-	while [ $count -le $test_num ]
+	while [ $count -le $inst_check_num ]
 	do
-		ret=$( make_10_arg )
+		ret=$( inst_check_10_arg )
 		if [ $ret -le $min ] || [ $min -eq 0 ]; then
 			min=$ret
 		fi
@@ -104,20 +140,17 @@ test_10 ()
 
 	ave=$(($ave / count))
 	echo FOR 10 VAR
-	printf "Min ops =\t%d\n" $min
-	printf "Max ops =\t%d\n" $max
-	printf "Average ops =\t%d\n" $ave
-	echo
+	printf "Min ops =\t%d\nMax ops =\t%d\nAverage ops =\t%d\n" $min $max $ave
 }
 
-test_100 ()
+test_inst_100 ()
 {
 	count=0
 	max=0
 	min=0
-	while [ $count -le $test_num ]
+	while [ $count -le $inst_check_num ]
 	do
-		ret=$( make_100_arg )
+		ret=$( inst_check_100_arg )
 		if [ $ret -le $min ] || [ $min -eq 0 ]; then
 			min=$ret
 		fi
@@ -130,20 +163,17 @@ test_100 ()
 
 	ave=$(($ave / count))
 	echo FOR 100 VAR
-	printf "Min ops =\t%d\n" $min
-	printf "Max ops =\t%d\n" $max
-	printf "Average ops =\t%d\n" $ave
-	echo
+	printf "Min ops =\t%d\nMax ops =\t%d\nAverage ops =\t%d\n" $min $max $ave
 }
 
-test_500 ()
+test_inst_500 ()
 {
 	count=0
 	max=0
 	min=0
-	while [ $count -le $test_num ]
+	while [ $count -le $inst_check_num ]
 	do
-		ret=$( make_500_arg )
+		ret=$( inst_check_500_arg )
 		if [ $ret -le $min ] || [ $min -eq 0 ]; then
 			min=$ret
 		fi
@@ -156,20 +186,17 @@ test_500 ()
 
 	ave=$(($ave / count))
 	echo FOR 500 VAR
-	printf "Min ops =\t%d\n" $min
-	printf "Max ops =\t%d\n" $max
-	printf "Average ops =\t%d\n" $ave
-	echo
+	printf "Min ops =\t%d\nMax ops =\t%d\nAverage ops =\t%d\n" $min $max $ave
 }
 
-test_1000 ()
+test_inst_1000 ()
 {
 	count=0
 	max=0
 	min=0
-	while [ $count -le $test_num ]
+	while [ $count -le $inst_check_num ]
 	do
-		ret=$( make_1000_arg )
+		ret=$( inst_check_1000_arg )
 		if [ $ret -le $min ] || [ $min -eq 0 ]; then
 			min=$ret
 		fi
@@ -182,16 +209,122 @@ test_1000 ()
 
 	ave=$(($ave / count))
 	echo FOR 1000 VAR
-	printf "Min ops =\t%d\n" $min
-	printf "Max ops =\t%d\n" $max
-	printf "Average ops =\t%d\n" $ave
-	echo
+	printf "Min ops =\t%d\nMax ops =\t%d\nAverage ops =\t%d\n" $min $max $ave
 }
 
-test_1 &
-test_5 &
-test_10 &
-test_100 &
-test_500 &
-test_1000 &
+test_ok_1 ()
+{
+	echo 'Checker 1:'
+	count=0
+	while [ $count -le $ok_check_num ];
+	do
+		if [ $( ok_check_1_arg )  == 'KO' ]; then
+			echo False
+			return 0
+		fi
+		((count++))
+	done
+	echo True
+}
+
+test_ok_5 ()
+{
+	echo 'checker 5:'
+	count=0
+	while [ $count -le $ok_check_num ];
+	do
+		if [ $( ok_check_5_arg )  == 'ko' ]; then
+			echo false
+			return 0
+		fi
+		((count++))
+	done
+	echo true
+}
+
+test_ok_10 ()
+{
+	echo 'Checker 10:'
+	count=0
+	while [ $count -le $ok_check_num ];
+	do
+		if [ $( ok_check_10_arg )  == 'KO' ]; then
+			echo False
+			return 0
+		fi
+		((count++))
+	done
+	echo True
+}
+
+test_ok_100 ()
+{
+	echo 'Checker 100:'
+	count=0
+	while [ $count -le $ok_check_num ];
+	do
+		if [ $( ok_check_100_arg )  == 'KO' ]; then
+			echo False
+			return 0
+		fi
+		((count++))
+	done
+	echo True
+}
+
+test_ok_500 ()
+{
+	echo 'Checker 500:'
+	count=0
+	while [ $count -le $ok_check_num ];
+	do
+		if [ $( ok_check_500_arg )  == 'KO' ]; then
+			echo False
+			return 0
+		fi
+		((count++))
+	done
+	echo True
+}
+
+test_ok_1000 ()
+{
+	echo 'Checker 1000:'
+	count=0
+	while [ $count -le $ok_check_num ];
+	do
+		if [ $( ok_check_1000_arg )  == 'KO' ]; then
+			return 0
+		fi
+		((count++))
+	done
+	echo True
+}
+
+t1=$(test_inst_1 &)
+t2=$(test_inst_5 &)
+t3=$(test_inst_10 &)
+t4=$(test_inst_100 &)
+t5=$(test_inst_500 &)
+t6=$(test_inst_1000 &)
 wait
+
+echo "$t1"
+echo
+echo "$t2"
+echo
+echo "$t3"
+echo
+echo "$t4"
+echo
+echo "$t5" 
+echo
+echo "$t6"
+echo
+
+test_ok_1
+test_ok_5
+test_ok_10
+test_ok_100
+test_ok_500
+test_ok_1000
