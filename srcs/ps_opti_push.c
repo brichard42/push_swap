@@ -6,95 +6,107 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:13:56 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/19 12:16:46 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:56:04 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ps_count_papb(t_dlist *inst, int *papb)
+static t_dlist	*skip_pa(t_dlist *inst, int n)
 {
-	papb[0] = 0;
-	papb[1] = 0;
-	while (inst->next && ft_strequ("pa", (char*)inst->content))
-	{
-		++papb[0];
+	while (inst && n-- && ft_strequ("pa", (char*)inst->content))
 		inst = inst->next;
-	}
-	while (inst->next && ft_strequ("pb", (char*)inst->content))
-	{
-		++papb[1];
-		inst = inst->next;
-	}
+	return (inst);
 }
 
-static void	ps_count_papb(t_dlist *inst, int *papb)
+static t_dlist	*skip_pb(t_dlist *inst, int n)
 {
-	papb[0] = 0;
-	papb[1] = 0;
-	while (inst->next && ft_strequ("pb", (char*)inst->content))
-	{
-		++papb[1];
+	while (inst && n-- && ft_strequ("pb", (char*)inst->content))
 		inst = inst->next;
-	}
-	while (inst->next && ft_strequ("pa", (char*)inst->content))
-	{
-		++papb[0];
-		inst = inst->next;
-	}
+	return (inst);
 }
 
-static void	ps_replace_rr(t_dlist **inst, int rr)
+static int		ps_count_pa(t_dlist *inst, t_dlist *(*f)(t_dlist*, int))
+{
+	int	i;
+
+	if (f)
+		if (!(inst = f(inst, INT_MAX)))
+			return (0);
+	i = 0;
+	while (inst && ft_strequ("pa", (char*)inst->content))
+	{
+		++i;
+		inst = inst->next;
+	}
+	return (i);
+}
+
+static int		ps_count_pb(t_dlist *inst, t_dlist *(*f)(t_dlist*, int))
+{
+	int	i;
+
+	if (f)
+		if (!(inst = f(inst, INT_MAX)))
+			return (0);
+	i = 0;
+	while (inst && ft_strequ("pb", (char*)inst->content))
+	{
+		++i;
+		inst = inst->next;
+	}
+	return (i);
+}
+
+static void	ps_del_nodes(t_dlist **inst, int n)
 {
 	t_dlist	*tmp;
 
-	if (rr == 0)
+	if (n == 0 || !inst || !*inst)
 		return ;
-	tmp = (*inst)->next;
-	(*inst)->next = (*inst)->next->next;
-	if ((*inst)->next->next)
-		(*inst)->next->next->prev = *inst;
+	tmp = (*inst);
+	if ((*inst = (*inst)->prev))
+		(*inst)->next = (*inst)->next->next;
+	if ((*inst)->next)
+		(*inst)->next->prev = (*inst);
 	ft_dlstdelone(&tmp, ps_del);
-	ft_strcpy((char*)(*inst)->content, "rr");
-	ps_replace_rr(inst, rr - 1);
+	ps_del_nodes(&(*inst)->next, --n);
 }
 
-void	ps_count_rr(t_dlist **inst)
+void		ps_opti_push(t_dlist **inst)
 {
-	int	rr[2];
-	int i;
-	int res;
-	t_dlist *tmp;
+	int		pa;
+	int		pb;
+	int		ret;
+	t_dlist	*tmp;
 
-	tmp = *inst;
-	res = 0;
 	if (ft_strequ("pa", (char*)(*inst)->content))
 	{
-		ps_count_papb(*inst, rr);
-		if (rr[0] > rr[1])
+		pa = ps_count_pa(*inst, NULL);
+		pb = ps_count_pb(*inst, skip_pa);
+		//ft_printf("pa | npa = %d npb = %d\n", pa, pb);
+		if ((ret = pa - pb) > 0)
 		{
-			i = rr[0] - rr[1];
-			while (i)
-			{
-				tmp = tmp->next;
-				--i;
-			}
+			if (!(tmp = skip_pa((*inst), ret)))
+				return ;
+			//ft_printf("izdisworking?\n");
+			ps_del_nodes(&tmp, pb * 2);
 		}
-		res = (rr[0] > rr[1] ? rr[1] * 2 : rr[0] * 2);
+		else
+			ps_del_nodes(inst, pa * 2);
 	}
 	else if (ft_strequ("pb", (char*)(*inst)->content))
 	{
-		ps_count_papb(*inst, rr);
-		if (rr[1] > rr[0])
+		pb = ps_count_pb(*inst, NULL);
+		pa = ps_count_pa(*inst, skip_pb);
+		//ft_printf("pb | npb = %d npa = %d\n", pb, pa);
+		if ((ret = pb - pa) > 0)
 		{
-			i = rr[1] - rr[0];
-			while (i)
-			{
-				tmp = tmp->next;
-				--i;
-			}
+			if (!(tmp = skip_pb((*inst), ret)))
+				return ;
+			ps_del_nodes(&tmp, pa * 2);
 		}
-		res = (rr[1] > rr[0] ? rr[0] * 2 : rr[1] * 2);
+		else
+			ps_del_nodes(inst, pb * 2);
 	}
-	ps_replace_rr(&tmp, res);
 }

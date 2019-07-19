@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:03:44 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/09 13:43:11 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:22:45 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ps_check_sort(t_env *env)
 	if (env->a.size < 2)
 		return (ft_putendl("OK"));
 	grind = INT_MIN;
-	i = 1;
+	i = 0;
 	while (i < env->a.size)
 	{
 		if (env->a.stack[i] < grind)
@@ -50,7 +50,7 @@ int			main(int ac, char **av)
 		ft_memdel((void*)&env.b.stack);
 		return (usage());
 	}
-//	print_stack(env.a, env.b);
+	//print_stack(env.a, env.b);
 	ps_init_op_tab(op_tab, OP_SIZE);
 	while (get_next_line(0, &line, '\n') > 0)
 	{

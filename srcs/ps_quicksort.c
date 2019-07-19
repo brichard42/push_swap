@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/09 11:46:26 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:45:12 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ void		ps_quicksort(t_env *env, int high, int id)
 	int	p_i;
 	int	rot;
 
+	if ((id == 0 && ps_is_sorted(env->a, high))
+			|| (id == 1 && ps_is_back_sorted(env->b, high)))
+		return ;
 	if (high  < 3)
 		return (ps_sort_case(env, high, id));
 	rot = 0;

@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:03:51 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/19 12:06:29 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:40:06 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ps_replace_rr(t_dlist **inst, int rr)
 	(*inst)->next = (*inst)->next->next;
 	if ((*inst)->next->next)
 		(*inst)->next->next->prev = *inst;
-	ft_dlstdelone(&tmp, ps_del);
+//	ft_dlstdelone(&tmp, ps_del);
 	ft_strcpy((char*)(*inst)->content, "rr");
 	ps_replace_rr(inst, rr - 1);
 }

@@ -218,7 +218,7 @@ test_ok_1 ()
 	count=0
 	while [ $count -le $ok_check_num ];
 	do
-		if [ $( ok_check_1_arg )  == 'KO' ]; then
+		if [ $( ok_check_1_arg )  != 'OK' ]; then
 			echo False
 			return 0
 		fi
@@ -233,7 +233,7 @@ test_ok_5 ()
 	count=0
 	while [ $count -le $ok_check_num ];
 	do
-		if [ $( ok_check_5_arg )  == 'ko' ]; then
+		if [ $( ok_check_5_arg )  != 'OK' ]; then
 			echo false
 			return 0
 		fi
@@ -248,7 +248,7 @@ test_ok_10 ()
 	count=0
 	while [ $count -le $ok_check_num ];
 	do
-		if [ $( ok_check_10_arg )  == 'KO' ]; then
+		if [ $( ok_check_10_arg )  != 'OK' ]; then
 			echo False
 			return 0
 		fi
@@ -263,7 +263,7 @@ test_ok_100 ()
 	count=0
 	while [ $count -le $ok_check_num ];
 	do
-		if [ $( ok_check_100_arg )  == 'KO' ]; then
+		if [ $( ok_check_100_arg )  != 'OK' ]; then
 			echo False
 			return 0
 		fi
@@ -278,7 +278,7 @@ test_ok_500 ()
 	count=0
 	while [ $count -le $ok_check_num ];
 	do
-		if [ $( ok_check_500_arg )  == 'KO' ]; then
+		if [ $( ok_check_500_arg )  != 'OK' ]; then
 			echo False
 			return 0
 		fi
@@ -293,7 +293,7 @@ test_ok_1000 ()
 	count=0
 	while [ $count -le $ok_check_num ];
 	do
-		if [ $( ok_check_1000_arg )  == 'KO' ]; then
+		if [ $( ok_check_1000_arg )  != 'OK' ]; then
 			return 0
 		fi
 		((count++))
