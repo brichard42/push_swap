@@ -6,13 +6,13 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/19 15:45:12 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:47:41 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		*ft_intcpy(const int *src, size_t size)
+static int	*ft_intcpy(const int *src, size_t size)
 {
 	int		*dst;
 	size_t	i;
@@ -30,7 +30,7 @@ int		*ft_intcpy(const int *src, size_t size)
 	return (dst);
 }
 
-int		get_median(t_stack curr, int high)
+static int	get_median(t_stack curr, int high)
 {
 	int	*cpy;
 	int	tmp;
@@ -42,7 +42,7 @@ int		get_median(t_stack curr, int high)
 	free (cpy);
 	return (tmp);
 }
-//#include <unistd.h>
+
 static int	ps_partition(t_env *env, int high, int id, int *rot)
 {
 	int	pivot;

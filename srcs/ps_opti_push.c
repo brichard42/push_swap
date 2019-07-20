@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:13:56 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/19 16:56:04 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:19:34 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ static void	ps_del_nodes(t_dlist **inst, int n)
 
 	if (n == 0 || !inst || !*inst)
 		return ;
+	ps_del_nodes(&(*inst)->next, n - 1);
 	tmp = (*inst);
-	if ((*inst = (*inst)->prev))
-		(*inst)->next = (*inst)->next->next;
-	if ((*inst)->next)
-		(*inst)->next->prev = (*inst);
+	if (((*inst) = (*inst)->prev))
+		(*inst)->next = tmp->next;
+	tmp->next->prev = (*inst);
 	ft_dlstdelone(&tmp, ps_del);
-	ps_del_nodes(&(*inst)->next, --n);
 }
 
 void		ps_opti_push(t_dlist **inst)
@@ -84,12 +83,10 @@ void		ps_opti_push(t_dlist **inst)
 	{
 		pa = ps_count_pa(*inst, NULL);
 		pb = ps_count_pb(*inst, skip_pa);
-		//ft_printf("pa | npa = %d npb = %d\n", pa, pb);
 		if ((ret = pa - pb) > 0)
 		{
 			if (!(tmp = skip_pa((*inst), ret)))
 				return ;
-			//ft_printf("izdisworking?\n");
 			ps_del_nodes(&tmp, pb * 2);
 		}
 		else
@@ -99,7 +96,6 @@ void		ps_opti_push(t_dlist **inst)
 	{
 		pb = ps_count_pb(*inst, NULL);
 		pa = ps_count_pa(*inst, skip_pb);
-		//ft_printf("pb | npb = %d npa = %d\n", pb, pa);
 		if ((ret = pb - pa) > 0)
 		{
 			if (!(tmp = skip_pb((*inst), ret)))

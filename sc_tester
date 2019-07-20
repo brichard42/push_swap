@@ -46,32 +46,37 @@ inst_check_1000_arg ()
 ok_check_1_arg ()
 {
 	ARG=`ruby -e "puts (1..1).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+	echo "$ARG" > logs_1
 }
 
 ok_check_5_arg ()
 {
 	ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+	echo "$ARG" > logs_5
 }
 
 ok_check_10_arg ()
 {
 	ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+	echo "$ARG" > logs_10
 }
 
 ok_check_100_arg ()
 {
 	ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
-	echo "$ARG" >> logs
+	echo "$ARG" > logs_100
 }
 
 ok_check_500_arg ()
 {
 	ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+	echo "$ARG" > logs_500
 }
 
 ok_check_1000_arg ()
 {
 	ARG=`ruby -e "puts (1..1000).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+	echo "$ARG" > logs_1000
 }
 
 test_inst_1 ()
@@ -219,6 +224,7 @@ test_ok_1 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_1_arg )  != 'OK' ]; then
+			echo "$( ok_check_1_arg )" >> logs_1
 			echo False
 			return 0
 		fi
@@ -234,6 +240,7 @@ test_ok_5 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_5_arg )  != 'OK' ]; then
+			echo "$( ok_check_5_arg )" >> logs_5
 			echo false
 			return 0
 		fi
@@ -249,6 +256,7 @@ test_ok_10 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_10_arg )  != 'OK' ]; then
+			echo "$( ok_check_10_arg )" >> logs_10
 			echo False
 			return 0
 		fi
@@ -264,6 +272,7 @@ test_ok_100 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_100_arg )  != 'OK' ]; then
+			echo "$( ok_check_100_arg )" >> logs_100
 			echo False
 			return 0
 		fi
@@ -279,6 +288,7 @@ test_ok_500 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_500_arg )  != 'OK' ]; then
+			echo "$( ok_check_500_arg )" >> logs_500
 			echo False
 			return 0
 		fi
@@ -294,6 +304,7 @@ test_ok_1000 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_1000_arg )  != 'OK' ]; then
+			echo "$( ok_check_1000_arg )" >> logs_1000
 			return 0
 		fi
 		((count++))

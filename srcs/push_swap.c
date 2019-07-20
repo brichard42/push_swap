@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:14:38 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/19 15:51:16 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:24:26 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int			main(int ac, char **av)
 		ft_memdel((void*)&env.b.stack);
 		return (usage());
 	}
-	//print_stack(env.a, env.b);
 	ps_quicksort(&env, env.size - 1, 0);
-	print_inst(env.inst);
 	ps_check_inst(&env.inst);
+	print_inst(env.inst);
 	ft_dlstdel(&env.inst, ps_del);
 	ft_memdel((void*)&env.a.stack);
 	ft_memdel((void*)&env.b.stack);
@@ -46,6 +45,6 @@ int			main(int ac, char **av)
 
 void	end(void)
 {
-//	ft_printf("in end\n");
-//	system("leaks push_swap");
+	//ft_printf("in end\n");
+	//system("leaks push_swap");
 }

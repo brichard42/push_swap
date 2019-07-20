@@ -6,26 +6,26 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:57:09 by brichard          #+#    #+#             */
-/*   Updated: 2019/06/17 14:20:54 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:35:30 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_del(void *content)
+void	ps_del(void **content)
 {
-	ft_memdel(&content);
+	ft_memdel(content);
 }
 
-void	ft_dlstdelone(t_dlist **alst, void (*del)(void*))
+void	ft_dlstdelone(t_dlist **alst, void (*del)(void**))
 {
 	if (!del || !alst || !*alst)
 		return ;
-	del((*alst)->content);
+	del((void**)&(*alst)->content);
 	ft_memdel((void**)alst);
 }
 
-void	ft_dlstdel(t_dlist **alst, void (*del)(void*))
+void	ft_dlstdel(t_dlist **alst, void (*del)(void**))
 {
 	if (!alst || !*alst || !del)
 		return ;
