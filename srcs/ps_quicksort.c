@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/20 16:47:41 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/22 17:18:35 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,28 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 
 static void	ps_inverse_rotate(t_env *env, int id, int rot)
 {
-	while (rot)
+	int	lim;
+
+	lim = id ? env->b.size : env->a.size;
+	if (rot > lim / 2)
 	{
-		if (id == 0)
-			rra(env, ps_save);
-		else
-			rrb(env, ps_save);
-		--rot;
+		while (lim - rot++)
+		{
+			if (id == 0)
+				ra(env, ps_save);
+			else
+				rb(env, ps_save);
+		}
+	}
+	else
+	{
+		while (rot--)
+		{
+			if (id == 0)
+				rra(env, ps_save);
+			else
+				rrb(env, ps_save);
+		}
 	}
 }
 
@@ -99,12 +114,5 @@ void		ps_quicksort(t_env *env, int high, int id)
 	ps_inverse_rotate(env, id, rot);
 	ps_quicksort(env, high - p_i, (id == 0 ? 0 : 1));
 	ps_quicksort(env, p_i - 1, (id == 0 ? 1 : 0));
-	while (p_i)
-	{
-		if (id == 0)
-			pa(env, ps_save);
-		else
-			pb(env, ps_save);
-		--p_i;
-	}
+	ps_push_n_elem(env, p_i, id);
 }

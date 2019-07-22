@@ -1,27 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_opti_inst.c                                     :+:      :+:    :+:   */
+/*   ps_op_n_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 11:56:15 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/22 17:21:24 by brichard         ###   ########.fr       */
+/*   Created: 2019/07/22 13:27:42 by brichard          #+#    #+#             */
+/*   Updated: 2019/07/22 15:43:36 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		ps_check_inst(t_dlist **inst)
+void	ps_push_n_elem(t_env *env, int n, int id)
 {
-	if (!inst || !(*inst) || !(*inst)->next)
-		return ;
-	//if (ft_strequ("sa", (char*)(*inst)->content))
-	//	ps_opti_swap(inst, "sb");
-	//else if (ft_strequ("sb", (char*)(*inst)->content))
-		//ps_opti_swap(inst, "sa");
-	else if (ft_strequ("pa", (char*)(*inst)->content)
-			|| ft_strequ("pb", (char*)(*inst)->content))
-		ps_opti_push(inst);
-	ps_check_inst(&(*inst)->next);
+	while (n)
+	{
+		if (id == 0)
+			pa(env, ps_save);
+		else
+			pb(env, ps_save);
+		--n;
+	}
+}
+
+void	ps_rotate_n_elem(t_env *env, int n, int id)
+{
+	while (n)
+	{
+		if (id == 0)
+			ra(env, ps_save);
+		else
+			rb(env, ps_save);
+		--n;
+	}
+}
+
+void	ps_inverse_rotate_n_elem(t_env *env, int n, int id)
+{
+	while (n)
+	{
+		if (id == 0)
+			rra(env, ps_save);
+		else
+			rrb(env, ps_save);
+		--n;
+	}
 }

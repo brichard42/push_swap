@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:34:34 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/18 16:45:37 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/22 16:51:11 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,47 @@ static void	ps_sort_three_1(t_env *env, int cases)
 	}
 }
 
-static void	ps_sort_three_glob(t_env *env, int id)
+static void	ps_sort_three_a(t_env *env, int x, int y, int z)
+{
+	if (x > y && y > z)
+	{
+		sa(env, ps_save);
+		sa(env, ps_save);
+	}
+	else if (y > z && z > x)
+	{
+		sa(env, ps_save);
+		sa(env, ps_save);
+	}
+	else if (y > x && x > z)
+		sa(env, ps_save);
+	else if (x > z && z > y)
+		ra(env, ps_save);
+	else if (z > x && x > y)
+		sa(env, ps_save);
+}
+
+static void	ps_sort_three_b(t_env *env, int x, int y, int z)
+{
+	if (x < y && y < z)
+	{
+		sb(env, ps_save);
+		rrb(env, ps_save);
+	}
+	else if (y < z && z < x)
+	{
+		rrb(env, ps_save);
+		sb(env, ps_save);
+	}
+	else if (y < x && x < z)
+		rrb(env, ps_save);
+	else if (x < z && z < y)
+		rb(env, ps_save);
+	else if (z < x && x < y)
+		sb(env, ps_save);
+}
+
+void		ps_sort_three_glob(t_env *env, int id)
 {
 	int	cases;
 	t_stack	x;
@@ -115,68 +155,6 @@ static void	ps_sort_three_glob(t_env *env, int id)
 	}
 }
 
-/*
-static void	ps_sort_three_little(t_env *env, int id)
-{
-	int	cases;
-	t_stack	x;
-
-	if (id == 0)
-	{
-		x = env->a;
-		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
-		if (cases == 2)
-		{
-			sa(env, ps_save);
-			ra(env, ps_save);
-		}
-		else if (cases == 3)
-			sa(env, ps_save);
-		else if (cases == 4)
-			ra(env, ps_save);
-		else if (cases == 5)
-			ra(env, ps_save);
-		else if (cases == 6)
-		{
-			sa(env, ps_save);
-			rra(env, ps_save);
-		}
-	}
-	else
-	{
-		x = env->b;
-		cases = ps_three_case_table(x.stack[0], x.stack[1], x.stack[2]);
-		if (cases == 1)
-		{
-			//ft_printf("1 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
-			sb(env, ps_save);
-			rrb(env, ps_save);
-		}
-		else if (cases == 2)
-		{
-			//ft_printf("2 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
-			rb(env, ps_save);
-		}
-		else if (cases == 3)
-		{
-			//ft_printf("3 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
-			rrb(env, ps_save);
-		}
-		else if (cases == 4)
-		{
-			//ft_printf("4 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
-			rrb(env, ps_save);
-			sb(env, ps_save);
-		}
-		else if (cases == 5)
-		{
-			//ft_printf("5 | %d %d %d\n", x.stack[0], x.stack[1], x.stack[2]);
-			sb(env, ps_save);
-		}
-	}
-}
-*/
-
 void		ps_sort_case(t_env *env, int high, int id)
 {
 	if (high == 1)
@@ -186,6 +164,10 @@ void		ps_sort_case(t_env *env, int high, int id)
 		else if (id == 1 && env->b.stack[0] < env->b.stack[1])
 			sb(env, ps_save);
 	}
-	else if (high == 2)
+	else if (high == 2)// && ((id == 0 && env->a.size != 3) || (id == 1 && env->b.size != 3)))
 		ps_sort_three_glob(env, id);
+	//else if (high == 2 && id == 0)
+		//ps_sort_three_a(env, env->a.stack[0], env->a.stack[1], env->a.stack[2]);
+	//else if (high == 2 && id == 1)
+		//ps_sort_three_b(env, env->b.stack[0], env->b.stack[1], env->b.stack[2]);
 }

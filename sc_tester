@@ -224,7 +224,6 @@ test_ok_1 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_1_arg )  != 'OK' ]; then
-			echo "$( ok_check_1_arg )" >> logs_1
 			echo False
 			return 0
 		fi
@@ -240,13 +239,12 @@ test_ok_5 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_5_arg )  != 'OK' ]; then
-			echo "$( ok_check_5_arg )" >> logs_5
-			echo false
+			echo False
 			return 0
 		fi
 		((count++))
 	done
-	echo true
+	echo True
 }
 
 test_ok_10 ()
@@ -256,7 +254,6 @@ test_ok_10 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_10_arg )  != 'OK' ]; then
-			echo "$( ok_check_10_arg )" >> logs_10
 			echo False
 			return 0
 		fi
@@ -272,7 +269,6 @@ test_ok_100 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_100_arg )  != 'OK' ]; then
-			echo "$( ok_check_100_arg )" >> logs_100
 			echo False
 			return 0
 		fi
@@ -288,7 +284,6 @@ test_ok_500 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_500_arg )  != 'OK' ]; then
-			echo "$( ok_check_500_arg )" >> logs_500
 			echo False
 			return 0
 		fi
@@ -304,7 +299,7 @@ test_ok_1000 ()
 	while [ $count -le $ok_check_num ];
 	do
 		if [ $( ok_check_1000_arg )  != 'OK' ]; then
-			echo "$( ok_check_1000_arg )" >> logs_1000
+			echo False
 			return 0
 		fi
 		((count++))

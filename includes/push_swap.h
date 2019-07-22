@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:16:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/20 15:35:48 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/22 15:52:37 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 
 void		ps_quicksort(t_env *env, int high, int id);
+void		ps_insert(t_env *env, int id);
 int			ps_is_sorted(t_stack cur, int high);
 int			ps_is_back_sorted(t_stack cur, int high);
 void		ps_sort_case(t_env *env, int high, int id);
@@ -35,5 +36,11 @@ t_dlist		*ft_dlstnew(void const *content, size_t content_size);
 
 void		ps_opti_swap(t_dlist **inst, char *next_swap);
 void		ps_opti_push(t_dlist **inst);
+
+void		ps_sort_three_glob(t_env *env, int id);
+
+void		ps_rotate_n_elem(t_env *env, int n, int id);
+void		ps_push_n_elem(t_env *env, int n, int id);
+void		ps_inverse_rotate_n_elem(t_env *env, int n, int id);
 
 #endif
