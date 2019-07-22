@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:13:56 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/22 17:21:47 by brichard         ###   ########.fr       */
+/*   Updated: 2019/07/22 20:52:28 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,18 @@ static void	ps_del_nodes(t_dlist **inst, int n)
 	if (n == 0 || !inst || !*inst)
 		return ;
 	ps_del_nodes(&(*inst)->next, n - 1);
+	//ft_printf("prev = %s | n = %d | *inst-cont %s | blop = %p | PROP %p | (*inst)->next->content %s\n", (*inst)->prev->content, n, (*inst)->content, *inst, (*inst)->next, (*inst)->next->content);
 	tmp = (*inst);
-	if (((*inst) = (*inst)->prev))
+	if ((*inst)->prev)
+	{
+		(*inst) = (*inst)->prev;
 		(*inst)->next = tmp->next;
+	}
+	else
+		(*inst) = (*inst)->next;
+		(*inst)->prev = NULL;
 	tmp->next->prev = (*inst);
+ 	//ft_printf("||inst cont %s ||\n", tmp->next->prev->content);
 	ft_dlstdelone(&tmp, ps_del);
 }
 
