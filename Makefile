@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/07/22 13:50:27 by brichard         ###   ########.fr        #
+#    Updated: 2019/08/27 16:37:45 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,11 +83,13 @@ SRCS_FILES =	push_swap.c \
 				print.c \
 				ps_quicksort.c \
 				ps_sort_case.c \
+				ps_sort_three.c \
+				ps_sort_three_glob.c \
 				ft_dlist.c \
 				ps_save.c \
 				ps_opti_inst.c \
 				ps_opti_push.c \
-				ps_opti_swap.c \
+				ps_opti_utils.c \
 				ps_op_n_elem.c \
 				ps_insert.c \
 

@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:14:38 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/22 17:30:24 by brichard         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:16:44 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,11 @@ int			main(int ac, char **av)
 		return (0);
 	ft_bzero((void*)&env, sizeof(t_env));
 	if (!(parse_arg(&env, ac, av)))
-	{
-		ft_memdel((void*)&env.a.stack);
-		ft_memdel((void*)&env.b.stack);
-		return (usage());
-	}
+		return (usage(&env));
 	ps_quicksort(&env, env.size - 1, 0);
 	ps_check_inst(&env.inst);
 	print_inst(env.inst);
 	ft_dlstdel(&env.inst, ps_del);
-	ft_memdel((void*)&env.a.stack);
-	ft_memdel((void*)&env.b.stack);
+	ps_delstacks(&env);
 	return (0);
-}
-
-void	end(void)
-{
-	//ft_printf("in end\n");
-	//system("leaks push_swap");
 }

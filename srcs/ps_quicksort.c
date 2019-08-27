@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/19 17:46:16 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/22 17:18:35 by brichard         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:20:53 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	get_median(t_stack curr, int high)
 		ft_exit_malloc();
 	ft_quicksort(cpy, 0, high);
 	tmp = cpy[high / 2];
-	free (cpy);
+	free(cpy);
 	return (tmp);
 }
 
@@ -58,7 +58,7 @@ static int	ps_partition(t_env *env, int high, int id, int *rot)
 	push = 0;
 	max_push = (high + 1) % 2 + (high + 1) / 2;
 	while (i <= high && push < max_push)
-	{	
+	{
 		if (id == 0 && *env->a.stack <= pivot && ++push)
 			pb(env, ps_save);
 		else if (id == 1 && *env->b.stack > pivot && ++push)
@@ -107,7 +107,7 @@ void		ps_quicksort(t_env *env, int high, int id)
 	if ((id == 0 && ps_is_sorted(env->a, high))
 			|| (id == 1 && ps_is_back_sorted(env->b, high)))
 		return ;
-	if (high  < 3)
+	if (high < 3)
 		return (ps_sort_case(env, high, id));
 	rot = 0;
 	p_i = ps_partition(env, high, id, &rot);
