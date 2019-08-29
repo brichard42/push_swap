@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brichard <brichard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/15 15:09:17 by brichard          #+#    #+#             */
+/*   Updated: 2019/06/13 14:00:39 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
-
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+{
+	if (!f | !lst)
+		return ;
+	if (lst->next)
+		ft_lstiter(lst, f);
+	f(lst);
+}

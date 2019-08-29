@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_int_realloc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2019/05/14 16:39:52 by brichard          #+#    #+#             */
+/*   Updated: 2019/05/19 17:41:46 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+int		ft_int_realloc(int **tab, size_t *size, int new)
+{
+	int		*tmp;
+	size_t	s_tmp;
 
-#endif
+	s_tmp = *size;
+	tmp = *tab;
+	if (!(*tab = ft_memalloc(sizeof(int) * (s_tmp + 1))))
+		return (0);
+	(*tab)[s_tmp] = new;
+	--s_tmp;
+	while ((int)s_tmp >= 0)
+	{
+		(*tab)[s_tmp] = tmp[s_tmp];
+		--s_tmp;
+	}
+	ft_memdel((void **)&tmp);
+	++*size;
+	return (1);
+}

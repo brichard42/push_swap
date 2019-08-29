@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_lstfind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/19 19:38:48 by brichard          #+#    #+#             */
+/*   Updated: 2019/06/13 14:00:16 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
-
-#endif
+t_list	*ft_lstfind(t_list *lst, void *data)
+{
+	if (data == (lst->content))
+		return (lst);
+	else if (lst->next)
+		return (ft_lstfind(lst->next, data));
+	return (NULL);
+}

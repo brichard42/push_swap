@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/13 17:28:32 by brichard          #+#    #+#             */
+/*   Updated: 2019/02/15 20:49:41 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+void	*ft_memalloc(size_t size)
+{
+	void	*s;
 
-#endif
+	s = NULL;
+	if (size == 0)
+		return (s);
+	if (!(s = (void*)malloc(size)))
+		return (NULL);
+	ft_bzero(s, size);
+	return (s);
+}

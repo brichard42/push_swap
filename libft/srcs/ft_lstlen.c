@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/19 19:17:53 by brichard          #+#    #+#             */
+/*   Updated: 2019/05/30 18:45:46 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+size_t	ft_lstlen(t_list *lst)
+{
+	size_t	size;
 
-#endif
+	if (!lst)
+		return (0);
+	size = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		++size;
+	}
+	return (size);
+}

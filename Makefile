@@ -6,7 +6,7 @@
 #    By: brichard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by brichard          #+#    #+#              #
-#    Updated: 2019/08/27 16:37:45 by brichard         ###   ########.fr        #
+#    Updated: 2019/08/29 16:28:53 by brichard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,6 @@ SRCS_FILES =	push_swap.c \
 				ps_opti_push.c \
 				ps_opti_utils.c \
 				ps_op_n_elem.c \
-				ps_insert.c \
 
 SRCS_FILES_C =	checker.c \
 				operators_s.c \

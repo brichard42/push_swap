@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/13 14:56:35 by brichard          #+#    #+#             */
+/*   Updated: 2018/11/16 15:21:50 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	if (src < dst)
+		while (len > i)
+		{
+			((unsigned char*)dst)[len - 1] = ((unsigned char*)src)[len - 1];
+			len--;
+		}
+	else
+		while (i < len)
+		{
+			((unsigned char*)dst)[i] = ((unsigned char*)src)[i];
+			i++;
+		}
+	return (dst);
+}

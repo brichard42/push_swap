@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_lstapp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brichard <brichard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/15 16:48:09 by brichard          #+#    #+#             */
+/*   Updated: 2019/08/27 17:19:24 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
-
-#endif
+void	ft_lstapp(t_list **alst, t_list *lst)
+{
+	if (!alst || !*alst)
+		return ;
+	if ((*alst)->next)
+		ft_lstapp(&(*alst)->next, lst);
+	else
+		(*alst)->next = lst;
+}

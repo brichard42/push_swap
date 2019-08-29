@@ -1,22 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   parsing_ffun.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/12/18 12:45:11 by brichard          #+#    #+#             */
+/*   Updated: 2018/12/18 15:09:27 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "ft_printf.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+int		p_minu(t_parse *res)
+{
+	res->f_minus = 1;
+	return (1);
+}
 
-#endif
+int		p_plus(t_parse *res)
+{
+	res->f_plus = 1;
+	return (1);
+}
+
+int		p_spac(t_parse *res)
+{
+	res->f_space = 1;
+	return (1);
+}
+
+int		p_zero(t_parse *res)
+{
+	res->f_zero = 1;
+	return (1);
+}
+
+int		p_hash(t_parse *res)
+{
+	res->f_hash = 1;
+	return (1);
+}

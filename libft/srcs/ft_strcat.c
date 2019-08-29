@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/07 21:13:06 by brichard          #+#    #+#             */
+/*   Updated: 2018/11/20 15:02:55 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+char	*ft_strcat(char *s1, const char *s2)
+{
+	int		i;
+	int		k;
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
-
-#endif
+	i = 0;
+	while (s1[i])
+		i++;
+	k = 0;
+	while (s2[k])
+	{
+		s1[i + k] = s2[k];
+		k++;
+	}
+	s1[i + k] = '\0';
+	return (s1);
+}

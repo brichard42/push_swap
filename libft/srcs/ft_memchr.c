@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_insert.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 13:41:03 by brichard          #+#    #+#             */
-/*   Updated: 2019/07/22 16:16:07 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/13 16:24:25 by brichard          #+#    #+#             */
+/*   Updated: 2018/11/16 15:48:55 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ps_insert(t_env *env, int id)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_stack	*cur;
-	t_stack	*isrt;
-	int		i;
+	size_t	i;
 
-	cur = (id == 0 ? &env->a : &env->b);
-	isrt = (id == 1 ? &env->a : &env->b);
-	i = isrt->size;
-	while (i)
+	i = 0;
+	while (i < n)
 	{
-		print_stack(env->a, env->b);
-		if (cur->stack[0] > isrt->stack[0])
-		{
-			ps_push_n_elem(env, 1, (id == 0 ? 1 : 0));
-			--i;
-		}
-		else if (cur->stack[0] < isrt->stack[0])
-			ps_rotate_n_elem(env, 1, id);
+		if (((unsigned char*)s)[i] == (unsigned char)c)
+			return (&((unsigned char*)s)[i]);
+		i++;
 	}
+	return (NULL);
 }

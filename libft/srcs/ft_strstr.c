@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   strstr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/07 22:54:13 by brichard          #+#    #+#             */
+/*   Updated: 2018/11/16 16:35:09 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	int		i;
+	int		j;
 
-#endif
+	if (ft_strcmp(haystack, "") == 0 && ft_strcmp("", needle) == 0)
+		return ((char*)haystack);
+	i = 0;
+	while (haystack[i])
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && needle[j])
+			j++;
+		if (needle[j] == '\0')
+			return ((char*)&haystack[i]);
+		i++;
+	}
+	return (NULL);
+}

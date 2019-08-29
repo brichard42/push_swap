@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2019/01/21 13:39:01 by brichard          #+#    #+#             */
+/*   Updated: 2019/01/21 13:46:08 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+char	*ft_strndup(const char *s1, size_t len)
+{
+	char	*s2;
+	int		i;
 
-#endif
+	if (!(s2 = (char*)ft_strnew(len)))
+		return (0);
+	i = 0;
+	while (len > 0 && s1[i])
+	{
+		s2[i] = s1[i];
+		++i;
+		--len;
+	}
+	return (s2);
+}

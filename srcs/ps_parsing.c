@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 16:49:07 by brichard          #+#    #+#             */
-/*   Updated: 2019/05/18 17:18:25 by brichard         ###   ########.fr       */
+/*   Updated: 2019/08/28 14:18:14 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ int				parse_arg(t_env *env, int ac, char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] != ' ' && !(ft_isdigit(av[i][j])) \
+			if (av[i][j] != ' ' && !(ft_isdigit(av[i][j]))
 					&& !(ps_valid_sign(av[i] + j)))
 				return (0);
 			if (ft_isdigit(av[i][j]) || ps_valid_sign(av[i] + j))
 				ps_get_num(env, av[i], &j);
 			++j;
+			if (av[i][j] != ' ' && av[i][j] != '\0')
+				return (0);
 		}
 		++i;
 	}

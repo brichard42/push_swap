@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/09 18:19:23 by brichard          #+#    #+#             */
+/*   Updated: 2018/11/14 12:07:44 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	l;
 
-#endif
+	l = n;
+	if (l < 0)
+	{
+		ft_putchar_fd('-', fd);
+		l = -l;
+	}
+	if (l > 9)
+		ft_putnbr_fd(l / 10, fd);
+	ft_putchar_fd(l % 10 + '0', fd);
+}

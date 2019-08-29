@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 15:24:27 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/29 16:37:44 by brichard         ###   ########.fr       */
+/*   Created: 2018/11/09 13:57:44 by brichard          #+#    #+#             */
+/*   Updated: 2018/11/27 16:55:38 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "ps_parsing.h"
-# include <unistd.h>
-# include "ps_t_op.h"
-# include "print.h"
-# include <limits.h>
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char			*s2;
+	unsigned int	i;
 
-#endif
+	if (s == NULL)
+		return (NULL);
+	i = 0;
+	if (!(s2 = ft_strnew(len)))
+		return (NULL);
+	while (i < len)
+		s2[i++] = s[start++];
+	return (s2);
+}

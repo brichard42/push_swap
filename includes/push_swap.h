@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:16:25 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/27 16:37:24 by brichard         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:28:36 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <limits.h>
 
 void		ps_quicksort(t_env *env, int high, int id);
-void		ps_insert(t_env *env, int id);
 int			ps_is_sorted(t_stack cur, int high);
 int			ps_is_back_sorted(t_stack cur, int high);
 void		ps_sort_case(t_env *env, int high, int id);
