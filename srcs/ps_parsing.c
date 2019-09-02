@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 16:49:07 by brichard          #+#    #+#             */
-/*   Updated: 2019/08/28 14:18:14 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:42:10 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,30 @@ static int		ps_valid_sign(char *arg)
 {
 	if (*arg && (*arg == '-' || *arg == '+'))
 	{
-		if ((arg[1] && !(ft_isdigit(arg[1]))) || !(arg[1]))
-			return (0);
-		else if (arg[1] && ft_isdigit(arg[1]))
+		if (arg[1] && ft_isdigit(arg[1]))
 			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }
 
-static void		ps_get_num(t_env *env, char *arg, int *j)
+static int8_t	ps_get_num(t_env *env, char *arg, int *j)
 {
-	if (!(ft_int_realloc(&(env->a.stack), &(env->a.size)\
-					, ft_atoi(&arg[*j]))))
-		ft_exit_malloc();
+	if (!(ft_int_realloc(&(env->a.stack), &(env->a.size), ft_atoi(&arg[*j]))))
+		return (0);
 	if (arg[*j] == '-' || arg[*j] == '+')
 		++*j;
 	while (arg[*j] && ft_isdigit(arg[*j]))
 		++*j;
-	--*j;
+	return (1);
 }
 
 int				parse_arg(t_env *env, int ac, char **av)
 {
 	int	i;
 	int	j;
+	int ret;
 
 	i = 1;
 	while (i < ac)
@@ -67,19 +67,19 @@ int				parse_arg(t_env *env, int ac, char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] != ' ' && !(ft_isdigit(av[i][j]))
-					&& !(ps_valid_sign(av[i] + j)))
-				return (0);
-			if (ft_isdigit(av[i][j]) || ps_valid_sign(av[i] + j))
-				ps_get_num(env, av[i], &j);
-			++j;
-			if (av[i][j] != ' ' && av[i][j] != '\0')
+			while (av[i][j] == ' ')
+				++j;
+			if (ft_isdigit(av[i][j]) || ps_valid_sign(&av[i][j]))
+				ret = ps_get_num(env, av[i], &j);
+			if (av[i][j] == '\0')
+				break ;
+			if (av[i][j] != ' ' || ft_isdigit(av[i][j]))
 				return (0);
 		}
 		++i;
 	}
 	env->size = env->a.size;
-	if (!(env->b.stack = ft_memalloc(sizeof(int) * env->size)))
-		ft_exit_malloc();
+	if (ret == 0 || !(env->b.stack = ft_memalloc(sizeof(int) * env->size)))
+		return (0);
 	return (check_double(env->a));
 }
