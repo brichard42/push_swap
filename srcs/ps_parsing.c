@@ -6,14 +6,14 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 16:49:07 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/02 16:42:10 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/02 19:11:19 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "ps_parsing.h"
 
-static int		check_double(t_stack to_check)
+static int			check_double(t_stack to_check)
 {
 	size_t	i;
 	size_t	j;
@@ -32,7 +32,7 @@ static int		check_double(t_stack to_check)
 	return (1);
 }
 
-static int		ps_valid_sign(char *arg)
+static int			ps_valid_sign(char *arg)
 {
 	if (*arg && (*arg == '-' || *arg == '+'))
 	{
@@ -44,18 +44,48 @@ static int		ps_valid_sign(char *arg)
 	return (0);
 }
 
-static int8_t	ps_get_num(t_env *env, char *arg, int *j)
+static long long	ps_atoi(const char *str)
 {
-	if (!(ft_int_realloc(&(env->a.stack), &(env->a.size), ft_atoi(&arg[*j]))))
-		return (0);
+	long long	neg;
+	long long	num;
+
+	neg = 1;
+	num = 0;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		++str;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			neg *= -1;
+		++str;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		num = num * 10 + (*str - '0') * neg;
+		if ((num > 0 && neg == -1) || (num < 0 && neg == 1))
+			return (LONG_MAX);
+		++str;
+	}
+	return (num);
+}
+
+static int8_t		ps_get_num(t_env *env, char *arg, int *j)
+{
+	int8_t	ret;
+
+	ret = 1;
+	if (ps_atoi(&arg[*j]) > INT_MAX)
+		ret = 0;
+	if (!(ft_int_realloc(&(env->a.stack), &(env->a.size), ps_atoi(&arg[*j]))))
+		ret = 0;
 	if (arg[*j] == '-' || arg[*j] == '+')
 		++*j;
 	while (arg[*j] && ft_isdigit(arg[*j]))
 		++*j;
-	return (1);
+	return (ret);
 }
 
-int				parse_arg(t_env *env, int ac, char **av)
+int					parse_arg(t_env *env, int ac, char **av)
 {
 	int	i;
 	int	j;
