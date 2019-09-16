@@ -6,7 +6,7 @@
 /*   By: brichard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 16:49:07 by brichard          #+#    #+#             */
-/*   Updated: 2019/09/02 19:11:19 by brichard         ###   ########.fr       */
+/*   Updated: 2019/09/16 11:40:30 by brichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static long long	ps_atoi(const char *str)
 			neg *= -1;
 		++str;
 	}
+	if (ft_strlen(str) > 11)
+		return (LONG_MAX);
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + (*str - '0') * neg;
@@ -74,7 +76,7 @@ static int8_t		ps_get_num(t_env *env, char *arg, int *j)
 	int8_t	ret;
 
 	ret = 1;
-	if (ps_atoi(&arg[*j]) > INT_MAX)
+	if (ps_atoi(&arg[*j]) > INT_MAX || ps_atoi(&arg[*j]) < INT_MIN)
 		ret = 0;
 	if (!(ft_int_realloc(&(env->a.stack), &(env->a.size), ps_atoi(&arg[*j]))))
 		ret = 0;
